@@ -5,7 +5,7 @@ const router = require('./routes/routes')
 const mongoose = require('mongoose')
 const PORT = 4000
 
-mongoose.connect('mongodb://localhost/Users', { useNewUrlParser: true,  useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost/Users', { useNewUrlParser: true,  useUnifiedTopology: true, useFindAndModify: false })
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {

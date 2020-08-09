@@ -95,6 +95,29 @@ router.delete('/:username/delete', (req, res) => {
 });
 
 
+// Route to delete user
+router.put('/update-user', (req, res) => {
+    const username = req.body.username;
+    
+    const updateUser = {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password
+    }
+
+    Users.findOneAndUpdate({ username }, updateUser, { new: true }, (err, user) => {
+        if(err){
+            res.status(500).json({ msg: "server error", err });
+        }else if(!user){
+            res.status(400).json({ msg: "user does not exist"});
+        }else{
+            res.status(200).json({msg: "user updated", user});
+        }
+    });
+  
+});
+
+
 module.exports = router;
 
 
